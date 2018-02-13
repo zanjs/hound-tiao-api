@@ -1,46 +1,20 @@
 package handler
 
-import (
-	"fmt"
-
-	jwt "github.com/dgrijalva/jwt-go"
-	"github.com/kataras/iris"
-)
-
-// UserHand is
-type UserHand struct{}
-
-// MyCustomClaims is
-type MyCustomClaims struct {
-	Foo string `json:"foo"`
-	jwt.StandardClaims
+// User is
+type User struct {
+	Controller
 }
-
-var mySigningKey = []byte("MySecret22")
 
 // Create is
-func (u UserHand) Create(ctx iris.Context) {
+// func (uh User) Create(ctx iris.Context) {
+// 	u := &models.UserLogin{}
+// 	if err := ctx.ReadJSON(u); err != nil {
+// 		ctx.StatusCode(iris.StatusBadRequest)
+// 		ctx.WriteString(err.Error())
+// 		return
+// 	}
 
-	// Create a new token object, specifying signing method and the claims
-	// you would like it to contain.
-	// token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-	// 	"foo": "bar",
-	// 	"nbf": time.Date(2018, 10, 10, 12, 0, 0, 0, time.UTC).Unix(),
-	// })
+// 	// u.Password = utils.HashPassword(u.Password)
 
-	// Create the Claims
-	claims := MyCustomClaims{
-		"bar2",
-		jwt.StandardClaims{
-			ExpiresAt: 999990,
-			Issuer:    "user2",
-		},
-	}
-
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	ss, err := token.SignedString(mySigningKey)
-
-	fmt.Println(err)
-
-	ResponseJSON(ctx, ss)
-}
+// 	ResponseJSON(ctx, u)
+// }

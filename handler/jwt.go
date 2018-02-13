@@ -1,8 +1,20 @@
 package handler
 
-import "github.com/kataras/iris"
+import (
+	"anla.io/hound/response"
+	"github.com/kataras/iris"
+)
 
 // JWTError is
 func JWTError(ctx iris.Context, str string) {
-	ResponseJSONError(ctx, str)
+	response.JSONError(ctx, str)
+}
+
+// Claims is
+type Claims map[string]interface{}
+
+// JWTHandler is
+func (ctl Controller) JWTHandler(ctx iris.Context) {
+	user := ctl.GetUser(ctx)
+	response.JSON(ctx, user)
 }

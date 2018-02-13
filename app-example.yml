@@ -1,0 +1,22 @@
+
+app:
+  name: hound
+  port: 8080
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: root
+  expire: 300
+
+db:
+  driver: mysql
+  host: 127.0.0.1
+  port: 3306
+  name: hound
+  user: root
+  password: root
+
+
+jwt:
+    secret: my2secVerifyPKCS1v1sdsa5retkey

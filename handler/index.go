@@ -1,10 +1,11 @@
 package handler
 
 import (
+	"anla.io/hound/response"
 	"github.com/kataras/iris"
 )
 
 // IndexHand is
 func IndexHand(ctx iris.Context) {
-	ResponseJSON(ctx, "hello boy!")
+	response.JSON(ctx, "hello boy!")
 }
