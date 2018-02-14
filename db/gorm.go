@@ -27,6 +27,9 @@ func init() {
 // setupMysqlConn: setup mysql database connection using the configuration from config.yml
 func setupMysqlConn() {
 	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", dbConfig.User, dbConfig.Password, dbConfig.Host, dbConfig.Port, dbConfig.Name)
+
+	fmt.Println(connectionString)
+
 	mysqlConn, err = gorm.Open("mysql", connectionString)
 	if err != nil {
 		panic(err)

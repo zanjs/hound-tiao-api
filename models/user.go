@@ -4,25 +4,48 @@ import (
 	"time"
 
 	"anla.io/hound/db"
+	"github.com/houndgo/suuid"
+	gm "github.com/jinzhu/gorm"
 )
 
 type (
+	// UserName is
+	UserName struct {
+		Username string `json:"username" gorm:"type:varchar(100);unique"`
+	}
 	// User is
 	User struct {
 		BaseModel
-		Username string `json:"username" gorm:"type:varchar(100);unique"`
+		UserName
 		Email    string `json:"email" gorm:"type:varchar(100);unique"`
 		Password string `json:"-"`
 	}
+
+	// UserShort is
+	UserShort struct {
+		UUIDModel
+		UserName
+	}
 	// UserLogin is
 	UserLogin struct {
-		Username string `json:"username" gorm:"type:varchar(100);unique"`
+		UserName
 		Password string `json:"password"`
 	}
 )
 
+//TableName is set User's table name to be `users`
+func (UserShort) TableName() string {
+	return "users"
+}
+
+//BeforeSave is
+func (s *User) BeforeSave(scope *gm.Scope) (err error) {
+	s.UID = suuid.New().String()
+	return err
+}
+
 // Create is user
-func (um User) Create(m *User) error {
+func (s User) Create(m *User) error {
 	var (
 		err error
 	)
@@ -38,7 +61,7 @@ func (um User) Create(m *User) error {
 }
 
 // GetByUsername is find user
-func (um User) GetByUsername(username string) (User, error) {
+func (s User) GetByUsername(username string) (User, error) {
 	var (
 		user User
 		err  error

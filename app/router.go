@@ -33,6 +33,7 @@ func InitApp() {
 
 	app.Get("/", handler.IndexHand)
 	app.Get("/init", handler.InitTable)
+	app.Get("/suuid", handler.UUID{}.Create)
 
 	v1 := app.Party("/api/v1")
 	{
@@ -42,11 +43,21 @@ func InitApp() {
 	}
 
 	Au := v1.Party("/a")
+	Op := v1.Party("/o")
 	Au.Use(jwtHandler.Serve)
 
 	AuArticle := Au.Party("/article")
 	{
 		AuArticle.Post("/", handler.Article{}.Create)
+	}
+	OpAriticle := Op.Party("/article")
+	{
+		OpAriticle.Get("/", handler.Article{}.All)
+	}
+
+	AuCategory := Au.Party("/category")
+	{
+		AuCategory.Post("/", handler.Category{}.Create)
 	}
 
 	// navigate to defafult config http://localhost:8080

@@ -4,6 +4,7 @@ import (
 	"anla.io/hound/models"
 	"anla.io/hound/response"
 	"anla.io/hound/utils"
+	"github.com/houndgo/suuid"
 	"github.com/kataras/iris"
 )
 
@@ -39,6 +40,7 @@ func (re Register) Add(ctx iris.Context) {
 
 	user.Username = u.Username
 	user.Password = utils.HashPassword(u.Password)
+	user.UID = suuid.New().String()
 
 	err := models.User{}.Create(&user)
 
