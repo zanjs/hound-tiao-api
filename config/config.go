@@ -29,6 +29,10 @@ var Config = struct {
 	JWT struct {
 		Secret string
 	}
+	Upload struct {
+		Path string `default:"uploads/m"`
+		Ext  string `default:".jpg|.jpeg|.png|.gif"`
+	}
 }{}
 
 func init() {

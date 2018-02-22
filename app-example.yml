@@ -17,6 +17,9 @@ db:
   user: root
   password: root
 
+upload:
+  path: uploads
+  ext: .jpg|.jpeg|.png
 
 jwt:
     secret: my2secVerifyPKCS1v1sdsa5retkey

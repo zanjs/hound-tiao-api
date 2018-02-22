@@ -2,13 +2,14 @@ package config
 
 import (
 	"os"
-	"time"
 
+	"github.com/houndgo/houndgo/ifile"
+	"github.com/houndgo/houndgo/itime"
 	"github.com/houndgo/houndgo/logfile"
 )
 
 func init() {
-	logfile.Mkdir(logfile.LogFIlePath)
+	ifile.Mkdir(logfile.LogFIlePath)
 
 	f := NewLogFile()
 	defer f.Close()
@@ -17,7 +18,7 @@ func init() {
 // get a filename based on the date, file logs works that way the most times
 // but these are just a sugar.
 func todayFilename() string {
-	today := time.Now().Format("2006-01-02")
+	today := itime.Today()
 	return logfile.LogFIlePath + "/" + today + ".log"
 }
 

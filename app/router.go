@@ -60,6 +60,11 @@ func InitApp() {
 		AuCategory.Post("/", handler.Category{}.Create)
 	}
 
+	AuUpload := Au.Party("/upload")
+	{
+		AuUpload.Post("/file", handler.UploadFile)
+	}
+
 	// navigate to defafult config http://localhost:8080
 	if err := app.Run(iris.Addr(":"+appConf.Port), iris.WithoutBanner); err != nil {
 		if err != iris.ErrServerClosed {
